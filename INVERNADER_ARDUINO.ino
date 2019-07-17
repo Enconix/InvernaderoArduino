@@ -8,6 +8,7 @@
  *  Maneja una sensor DHT11 (Se puede actualizar a un más preciso) y un 4 reles
  *  para las 4 acciones de control, aumentar temperatura (heater), aumentar humedad 
  *  (humidificador), reducir temperatura (ventilador), reducir humedad (ventilador_humedad)
+ *  prueba de fork en github, agrego esta linea para saber y ver la diferencia 
  *  
  */
 
@@ -57,16 +58,16 @@ void setup() {
 
   //Definición salidas 
   
-  pinMode(heater, OUTPUT);
+  pinMode(heater, OUTPUT);   //todo como salida 
   pinMode(humidificador, OUTPUT);
   pinMode(fan, OUTPUT);
   pinMode(fanhum, OUTPUT);
 
-  digitalWrite(heater,LOW);
+  digitalWrite(heater,LOW);  //inicializamos con un valor cero, o sea apagado 
 }
 
 void loop() {
-  // Esperar 6 segundos entre medidas
+  // Esperar 6 segundos entre medidas para darle un tiempo de lectura al sensor 
   delay(6000);
   
   // Lectura de humedad (%)
@@ -75,7 +76,7 @@ void loop() {
   float t = dht.readTemperature();
   
   //Verificación de lectura
-  if (isnan(h) || isnan(t) ){
+  if (isnan(h) || isnan(t) ){    
       Serial.println("Error de Lectura, Verificar Sensor o Conexión");
   }
 
@@ -99,7 +100,7 @@ void aumentar_temp(){
        digitalWrite(heater,HIGH); //Prender heater
     }
     
-    ciclo += ciclo; //Sumamos Ciclo 
+    ciclo += ciclo; //Sumamos Ciclo  ciclo =ciclo +1 
 
     if (ciclo>ciclos_ref){
       digitalWrite(heater,LOW);
